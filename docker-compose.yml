@@ -1,0 +1,25 @@
+version: '2'
+
+volumes:
+  database_data:
+    driver: local
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    tty: true
+    volumes:
+      - .:/development
+  mysql:
+    image: mysql:latest
+    ports:
+        - "3306:3306"
+    volumes:
+        - database_data:/var/lib/mysql_data
+    environment:
+        - MYSQL_ROOT_PASSWORD=secret
+        - MYSQL_USER=dev_user
+        - MYSQL_PASSWORD=dev_pswrd
+        - MYSQL_DATABASE=dev_table
