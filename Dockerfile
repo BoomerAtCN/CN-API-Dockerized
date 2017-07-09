@@ -4,13 +4,16 @@ FROM ubuntu:xenial
 ENV NODE_EV "development"
 
 # Install all dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y software-properties-common && \ 
+    LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
     ca-certificates \
     curl \
     vim \
     git \
     make \
-    php \
+    php7.1 \
     php-curl \
     php-xml \
     php-mbstring \
